@@ -1,0 +1,19 @@
+﻿{
+  "name": "Context Search",
+  "description": "Add your favorite search engines on the right-click menu.",
+  "version": "0.2",
+
+  "permissions": [
+    "contextMenus", 
+    "tabs",
+    "storage"
+  ],
+
+  "background": {
+    "page": "background.html"
+  },
+
+  "options_page": "options.html",
+
+  "manifest_version": 2
+}
