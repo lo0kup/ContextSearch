@@ -1,14 +1,22 @@
 ﻿<html>
 <head><title>Context Search Extension Options</title></head>
 <body>
-
- Context menu name: <input name="cs_name" id="cs_name"></input><br>
- Context menu items: <textarea name="cs_options" id="cs_options" cols=80 rows=40></textarea>
-
-<br>
-<div id="cs_status"></div>
-<button id="save">Save</button>
-
+<b>菜单名称</b><br>
+<blockquote><input name="cs_name" id="cs_name"></input></blockquote>
+<b>菜单项</b><br>
+<blockquote>
+表格添加和快速导入只能选其一。如果遇到搜索引擎字符乱码，请选择对应的"编码"选项。<p>
+<input type="checkbox" id="cs_import">快速导入菜单数据</input><br>
+<textarea name="cs_options" id="cs_options" cols=100 rows=12 style='display:none'></textarea><br>
+<table id="cs_tb_data"></table><p>
+<button type="button" id="cs_item_new">添加</button><br><br>
+</blockquote>
+<b>划词搜索</b><br>
+<blockquote><input type="checkbox" id="cs_ctrl">需要同时按下Ctrl键</input></blockquote><br>
+<hr width="800px" align="left"/>
+<blockquote><div id="cs_status"></div>
+<button id="save">保存</button></blockquote>
+<br><br>	
 <script src="options.js"></script>
 </body>
 </html>
