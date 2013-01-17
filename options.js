@@ -1,4 +1,10 @@
-﻿// Copyright (c) 2012 zhymax. All rights reserved.
+﻿///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//   Context Search                                                      //
+//   Copyright (c) 2013 zhymax (zhymax at gmail d0t com)                 //
+//   Licensed under the GPL licenses.                                    //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 
 var itemIndex = 0; // 菜单项序号
@@ -23,8 +29,8 @@ function addItem(table, item)
 	td.innerHTML =
 		"<input id='cs_item_enable_"+id+"' type='checkbox'"+checked+"></input>" +
 		"<input id='cs_item_catalog_"+id+"' type='text' placeholder='菜单分组名称' value='"+catalog+"' style='width:90px'>" +
-		"<input id='cs_item_id_"+id+"' type='text' placeholder='菜单名称' value='"+name+"'>" +
-		"<input id='cs_item_url_"+id+"' type='text' placeholder='搜索地址' value='"+url+"' style='width:450px'>" +
+		"<input id='cs_item_id_"+id+"' type='text' placeholder='菜单名称' value='"+name+"' >" +
+		"<input id='cs_item_url_"+id+"' type='text' placeholder='搜索地址' value='"+url+"' style='width:400px'>" +
 		"<input id='cs_item_encode_"+id+"' type='checkbox'"+urlEncode+">编码 </input>" +
 		"<button id='cs_item_up"+id+"' type='button' title='上移'>上移</button>" +
 		"<button id='cs_item_down"+id+"' type='button' title='下移'>下移</button>" +
@@ -69,7 +75,7 @@ function addItem(table, item)
 	}, true);
 }
 
-// 读取配置，更新界面
+// 读取配置，更新界面 option.html
 function updateWindowData()
 {
 	var table = document.getElementById("cs_tb_data");

@@ -31,6 +31,7 @@
 
   "manifest_version": 2,
   "name": "Context Search",
-  "description": "快速选择文字搜索工具，支持右键菜单搜索、划词菜单搜索、菜单分组。支持多浏览器同步配置；默认保存多种常用搜索引擎，支持自定义。",
+  "description": "快速选择文字多引擎搜索工具，支持右键菜单搜索、划词搜索、菜单分组。支持多浏览器同步配置；默认保存多种常用搜索引擎，支持自定义。",
+  "update_url": "http://clients2.google.com/service/update2/crx",
   "version": "1.0"
 }

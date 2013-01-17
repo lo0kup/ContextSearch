@@ -1,13 +1,18 @@
-﻿// Copyright (c) 2012 zhymax. All rights reserved.
-
-
+﻿///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//   Context Search                                                      //
+//   Copyright (c) 2013 zhymax (zhymax at gmail d0t com)                 //
+//   Licensed under the GPL licenses.                                    //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 // 使用浏览器间同步的方式保存配置
 var Storage = chrome.storage.sync;
 
 // 默认配置数据
-var defOpts = {"VER":"1","NAME":"用其他引擎搜索 \"%s\"","TRIGGERKEY":true,"SEARCHENGINES":[
-	{"CATALOG":"","ID":"Google","URL":"http://www.google.com.hk/search?q=%s","ENCODE":false,"ENABLE":true},
+var defOpts = {"VER":"1","NAME":"用其他引擎搜索 \"%s\"","TRIGGERKEY":false,"SEARCHENGINES":[
+	{"CATALOG":"","ID":"Google(安全)","URL":"https://www.google.com.hk/search?q=%s","ENCODE":false,"ENABLE":true},
+	{"CATALOG":"","ID":"Google","URL":"http://www.google.com.hk/search?q=%s","ENCODE":false,"ENABLE":false},
 	{"CATALOG":"网页","ID":"必应","URL":"http://www.bing.com/search?q=%s","ENCODE":false,"ENABLE":true},
 	{"CATALOG":"网页","ID":"雅虎","URL":"http://one.cn.yahoo.com/s?p=%s","ENCODE":false,"ENABLE":false},
 	{"CATALOG":"网页","ID":"百度","URL":"http://www.baidu.com/s?wd=%s","ENCODE":false,"ENABLE":true},
@@ -241,7 +246,6 @@ function init()
 		}
 	});
 };
-
 
 
 // 初始化

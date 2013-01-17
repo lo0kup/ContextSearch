@@ -1,0 +1,20 @@
+﻿@charset "utf-8";
+body {	
+	font-family: 'Segoe UI', Arial, 'Microsoft Yahei', Simsun, sans-serif;
+	font-size: 75%;
+	color: #666;
+	background: #F6F6F6;
+	height: 100%;
+	overflow:scroll;
+	margin:5px;
+	padding:0;
+}
+.default{
+	width:960px;
+	margin:0 auto;
+	padding:0;
+}
+.btn {
+	width:80px;
+	height:30px;
+}
