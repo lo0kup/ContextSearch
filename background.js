@@ -124,7 +124,7 @@ function getOptions(cb)
 // 创建上下文菜单项和子菜单
 function createContextMenu(opts)
 {
-	console.log("Create context menu");
+	//console.log("Create context menu");
 
 	J = opts;
 
@@ -215,9 +215,11 @@ function init()
 	deleteContextMenu();
 
 	// 读取选项配置，加载菜单
-	// 完成后设置事件监听函数
-	getOptions(createContextMenu, function(){
-		 // Storage有改动时，调用此函数重新生成菜单
+	getOptions(function(opts){
+		// 初始化时创建菜单
+		createContextMenu(opts);
+		 // 注册Storage改动监听函数
+		 // 调用getOptions函数重新生成菜单
 		chrome.storage.onChanged.addListener(function(changes, namespace) {
 			deleteContextMenu();
 			getOptions(createContextMenu);
@@ -243,6 +245,19 @@ function init()
 			setOptions(request.opts, function(){
 				sendResponse();
 			});
+		}
+		else if (request.cmd == 'restore')
+		{
+			// 清空配置，重新读取
+			Storage.set({'cs_options_num':0}, function(){
+				getOptions(function(opts){
+					sendResponse();
+				});
+			});
+		}
+		else
+		{
+			console.log("Recieve request: " + request);
 		}
 	});
 };

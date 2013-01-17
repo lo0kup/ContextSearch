@@ -19,13 +19,19 @@ var aMargin = 5; // 菜单项间隔
 // 创建和显示菜单
 function createSearchMenu(opts, x, y)
 {
-	console.log("Create search menu.");
+	//console.log("Create search menu.");
 
 	// 解析json格式的配置数据
 	var J = opts;
 	if (J == null)
 	{
 		console.log("Failed to create context menu item.");
+		return;
+	}
+
+	// 没有菜单项存在，直接返回
+	if (J.SEARCHENGINES.length == 0)
+	{
 		return;
 	}
 
@@ -64,6 +70,7 @@ function createSearchMenu(opts, x, y)
 		// 创建默认分组
 		var defCatMenu = document.createElement("div");
 		defCatMenu.id = defCatMenuId;
+		searchMenu.align = "left";
 		defCatMenu.style.borderBottom="4px solid #F6F6F6";
 		searchMenu.appendChild(defCatMenu);
 
@@ -149,9 +156,15 @@ document.addEventListener("keyup", function() {
 }, true);
 
 document.addEventListener("mouseup", function() {
-	// 只处理鼠标左键
+	var searchMenu = document.getElementById(searchMenuId);
+
+	// 只处理鼠标左键，其他键按下时如果有菜单，则删除菜单
 	if (event.button != 0)
 	{
+		if(searchMenu)
+		{
+			document.body.removeChild(searchMenu);
+		}
 		return;
 	}
 
@@ -159,15 +172,10 @@ document.addEventListener("mouseup", function() {
 	var x = event.pageX;
 	var y = event.pageY;
 
-	// 在菜单已经显示的情况下，如果鼠标点击了菜单之外位置，则删除菜单，
-	// 否则不做处理，继续等待超链接的点击事件。
-	var searchMenu = document.getElementById(searchMenuId);
+	// 菜单已经显示，此时如果鼠标点击了菜单之外位置，则删除菜单，
+	// 否则不做处理，继续等待超链接的点击事件。	
 	if (searchMenu)
 	{
-		//console.log("x:" + x + " y:" + y +
-		//	" offsetLeft:" + searchMenu.offsetLeft + " offsetWidth:" + searchMenu.offsetWidth +
-		//	" offsetTop:" + searchMenu.offsetTop + " offsetHeight" + searchMenu.offsetHeight);
-
 		if (x >= searchMenu.offsetLeft && x <= (searchMenu.offsetLeft + searchMenu.offsetWidth)
 			&& y >= searchMenu.offsetTop && y <= (searchMenu.offsetTop + searchMenu.offsetHeight))
 		{
@@ -176,7 +184,6 @@ document.addEventListener("mouseup", function() {
 		}
 		else
 		{
-			// 删除当前菜单
 			document.body.removeChild(searchMenu);
 		}
 	}

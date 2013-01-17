@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 
+var J = null;
 var itemIndex = 0; // 菜单项序号
 var checkedColor = "#c9dcec";
 
@@ -61,10 +62,19 @@ function addItem(table, item)
 	var btnDown = document.getElementById("cs_item_down"+id);
 	btnDown.addEventListener("click", function(){
 		var next = tr.nextSibling;
-		if (next != null && next.nextSibling != null)
+		if (next != null)
 		{
-			table.removeChild(tr);
-			table.insertBefore(tr, next.nextSibling);
+			if (next.nextSibling != null)
+			{
+				table.removeChild(tr);
+				table.insertBefore(tr, next.nextSibling);
+			}
+			else
+			{  
+				// 最后一行
+				table.removeChild(next);
+				table.insertBefore(next, tr);
+			}
 		}
 	}, true);
 
@@ -81,7 +91,7 @@ function updateWindowData()
 	var table = document.getElementById("cs_tb_data");
 
 	chrome.extension.sendRequest({cmd: 'get_options'}, function(opts) {
-		var J =  opts;
+		J =  opts;
 
 		// 搜索引擎菜单项添加到界面表格中
 		for (var i = 0; i < J.SEARCHENGINES.length; i++)
@@ -121,6 +131,13 @@ function updateWindowData()
 
 	// 保存
 	document.querySelector('#save').addEventListener('click', saveWindowData);
+
+	// 恢复配置
+	document.querySelector('#restore').addEventListener('click', function(){
+		chrome.extension.sendRequest({cmd: 'restore'}, function(){
+			location.reload();
+		});
+	});
 }
 
 // 读取界面数据，保存到Storage
@@ -128,8 +145,14 @@ function saveWindowData()
 {
 	var opts = null;
 
-	var name = document.getElementById("cs_name").value;
 	var ctrl = document.getElementById("cs_ctrl").checked;
+	var name = document.getElementById("cs_name").value;
+
+	// 如果菜单名称为空，自动恢复
+	if(name = "")
+	{
+		name = J.NAME;
+	}	
 
 	// 选择配置数据来源
 	if (document.getElementById("cs_import").checked)
@@ -155,11 +178,9 @@ function saveWindowData()
 				var url = td.childNodes[3].value;
 				var encode = td.childNodes[4].checked;
 
-
-				if (catalog != "-" && (id == "" || url == ""))
+				if (catalog == "" && id == "" && url == "")
 				{
-					// 不是分隔符，不允许id或者url为空
-					// todo：界面添加提示
+					// 所有内容都为空，不保存该行数据
 					continue;
 				}
 
