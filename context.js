@@ -64,6 +64,7 @@ function createSearchMenu(opts, x, y)
 			backgroundColor = "#F6F6F6";
 			border = "1px solid #666";
 			padding = "4px";
+			llineHeight = "normal";
 		}
 		document.body.appendChild(searchMenu);
 
