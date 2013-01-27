@@ -149,7 +149,7 @@ function saveWindowData()
 	var name = document.getElementById("cs_name").value;
 
 	// 如果菜单名称为空，自动恢复
-	if(name = "")
+	if(name == "")
 	{
 		name = J.NAME;
 	}	
@@ -159,7 +159,7 @@ function saveWindowData()
 	{
 		// 文本数据，JSON格式
 		var textarea = document.getElementById("cs_options");
-		opts = {"VER":"1", "NAME":name, "TRIGGERKEY": ctrl, "SEARCHENGINES": textarea.value};
+		opts = JSON.parse(textarea.value);
 	}
 	else
 	{
